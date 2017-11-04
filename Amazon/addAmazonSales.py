@@ -5,15 +5,15 @@ file = 'Amazon-Sold+Listings+Report+11-02-2017 - Copy.txt'#sys.argv[1]
 
 def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales list export
 	x = 1
-	with open(file, 'r') as amznTxt:
-		reader = csv.reader(amznTxt, delimiter='\t') # Amazon only exports as tab delimited txt
+	with open(file, 'r') as inCsv:
+		reader = csv.reader(inCsv, delimiter='\t') # Amazon only exports as tab delimited txt
 		header = reader.next() # headers
 		currentTime = datetime.now() # Current day/month/year to be used later
 
-		with open('amazonSales-%s.csv' % currentTime.strftime("%m-%d-%Y"), 'a+') as amazonOutput: # Start datestamped log file
+		with open('amazonSales-%s.csv' % currentTime.strftime("%m-%d-%Y"), 'a+') as output: # Start datestamped log file
 			for each in header: # Write header to log file
-				amazonOutput.write('%s,' % each) # comma delimited
-			amazonOutput.write('\n') # newline escaped
+				output.write('%s,' % each) # comma delimited
+			output.write('\n') # newline escaped
 			print header
 
 			for index in reader: # For each index in Amazon export
@@ -28,13 +28,13 @@ def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales lis
 						print x
 
 						for each in index: # For each in row
-							amazonOutput.write("%s," % each) # Write entire rows contents to log file, comma delimited
-						amazonOutput.write("=sum(D%x*K%x)" % (x, x)) # Hardcoded, universal spreadsheet coordinates. sell price * qty
-						amazonOutput.write('\n') # new line escaped
+							output.write("%s," % each) # Write entire rows contents to log file, comma delimited
+						output.write("=sum(D%x*K%x)" % (x, x)) # Hardcoded, universal spreadsheet coordinates. sell price * qty
+						output.write('\n') # new line escaped
 						print index
 					else: # Otherwise, from a previous month.
 						pass # pass.
-			amazonOutput.write(",,,=sum(D2:D%x),,,,,,,,=sum(L2:L%x)" % (x, x)) # hrdcoded universal coordinates for sum of sold*qty column.
+			output.write(",,,=sum(D2:D%x),,,,,,,,=sum(L2:L%x)" % (x, x)) # hrdcoded universal coordinates for sum of sold*qty column.
 
 AmazonSales(file)
 
