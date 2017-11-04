@@ -1,9 +1,6 @@
 import csv, sys
 from datetime import datetime
 
-#Amazon Header
-#['item-name', 'listing-id', 'sku', 'price', 'shipping-fee', 'purchase-date', 'buyer-email', 'buyer-nick-name', 'date-listed', 'item-is-marketplace', 'quantity']
-
 file = 'Amazon-Sold+Listings+Report+11-02-2017 - Copy.txt'#sys.argv[1]
 
 def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales list export
@@ -38,5 +35,8 @@ def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales lis
 					else: # Otherwise, from a previous month.
 						pass # pass.
 			amazonOutput.write(",,,=sum(D2:D%x),,,,,,,,=sum(L2:L%x)" % (x, x)) # hrdcoded universal coordinates for sum of sold*qty column.
-			#amazonOutput.write("=sum(L2:L%x)" % x)
+
 AmazonSales(file)
+
+#Amazon Header
+#['item-name', 'listing-id', 'sku', 'price', 'shipping-fee', 'purchase-date', 'buyer-email', 'buyer-nick-name', 'date-listed', 'item-is-marketplace', 'quantity']
