@@ -32,11 +32,11 @@ def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales lis
 
 						for each in index: # For each in row
 							amazonOutput.write("%s," % each) # Write entire rows contents to log file, comma delimited
-						amazonOutput.write("=sum(D%x*K%x)" % (x, x))
+						amazonOutput.write("=sum(D%x*K%x)" % (x, x)) # Hardcoded, universal spreadsheet coordinates. sell price * qty
 						amazonOutput.write('\n') # new line escaped
 						print index
 					else: # Otherwise, from a previous month.
 						pass # pass.
-			amazonOutput.write(",,,=sum(D2:D%x),,,,,,,,=sum(L2:L%x)" % (x, x))
+			amazonOutput.write(",,,=sum(D2:D%x),,,,,,,,=sum(L2:L%x)" % (x, x)) # hrdcoded universal coordinates for sum of sold*qty column.
 			#amazonOutput.write("=sum(L2:L%x)" % x)
 AmazonSales(file)
