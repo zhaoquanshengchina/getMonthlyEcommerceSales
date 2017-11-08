@@ -1,7 +1,7 @@
 import csv, sys
 from datetime import datetime
 
-file = 'Ebay-FileExchange_Response_40901156.csv'#sys.argv[1]
+file = sys.argv[1]
 
 def EbaySales(file): # Get only monthly sales for Amazon Marketplace sales list export
 	x = 1
@@ -36,7 +36,7 @@ def EbaySales(file): # Get only monthly sales for Amazon Marketplace sales list 
 							pass
 			output.write(",,,,,,,,,,,,,,,=sum(P2:P%s),,,,,=sum(U2:U%s),,,,,,,,,,,,,,,,,,,,," % (x, x))
 							
-ebaySales(file)
+EbaySales(file)
 
 #Ebay Header
 #['Sales Record Number,User Id,Buyer Fullname,Buyer Phone Number,Buyer Email,Buyer Address 1,Buyer Address 2,Buyer City,Buyer State,Buyer Zip,
