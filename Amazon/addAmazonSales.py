@@ -4,7 +4,7 @@ from datetime import datetime
 #Amazon Header
 #['item-name', 'listing-id', 'sku', 'price', 'shipping-fee', 'purchase-date', 'buyer-email', 'buyer-nick-name', 'date-listed', 'item-is-marketplace', 'quantity']
 
-file = 'Amazon-Sold+Listings+Report+11-02-2017 - Copy.txt'#sys.argv[1]
+file = sys.argv[1]
 
 def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales list export
 	x = 1
@@ -31,11 +31,11 @@ def AmazonSales(file): # Get only monthly sales for Amazon Marketplace sales lis
 						print x
 
 						for each in index: # For each in row
-							output.write("%s," % each) # Write entire rows contents to log file, comma delimited
-						output.write("=sum(D%x*K%x)" % (x, x))
+							output.write("%s," % each.replace(',', '')) # Write entire rows contents to log file, comma delimited
+						output.write("=sum(D%s*K%s)" % (x, x))
 						output.write('\n') # new line escaped
 						print index
 					else: # Otherwise, from a previous month.
 						pass # pass.
-			output.write(",,,=sum(D2:D%x),,,,,,,,=sum(L2:L%x)" % (x, x))
+			output.write(",,,=sum(D2:D%s),,,,,,,,=sum(L2:L%s)" % (x, x))
 AmazonSales(file)
