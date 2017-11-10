@@ -3,6 +3,11 @@ import os
 def Contents(filez):
 	for each in filez.readlines():
 		return each
+	
+def PassIndexParams():
+	# put repetetive lines here
+	# replace index variables (respective to market's exported spreadsheet index) with passed param
+	return
 
 cwd = os.getcwd()
 for dirPath, dirNames, fileNames in os.walk(cwd):
