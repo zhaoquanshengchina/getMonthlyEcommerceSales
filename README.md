@@ -16,8 +16,8 @@ System agnostic and all imported libraries are native to default python installa
 
 ## Why?
 **Reliable weekly sales reports. Despite each eCommerce platform using different export conventions.**
-* See '**TODO**'
 * Reliable sales. It's easy to mixup which **correct** indexes need to be added, ignored, multiplied, etc...
+* See '**TODO**'
 * Each eCommerce platform exports their sales in a different way and has it's own pros/cons when assessing.
     - Amazon/Walmart allow export of all sales in 30/60/90 day incriments (across months)
     - Ebay allows for scheduled export within a **range** of dates. Dates often times different from Amazon/Walmart, above.
