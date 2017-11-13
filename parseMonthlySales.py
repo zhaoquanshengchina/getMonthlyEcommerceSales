@@ -56,7 +56,7 @@ def wallyIndexes(reader, output, x):
 				replacePrint(output, index)
 				x += 1
 
-	output.write(",,,,,,,,,,,,,,,,,,,=SUM(T2:T%s),,=SUM(V2:V%s),,,,,,," % (x, x))
+	output.write(",,,,,,,,,,,,,,,,,,,=SUM(T2:T%s),,=SUM(V2:V%s),,,,,,,," % (x, x))
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
 def parseBasedOnStore(storeName, reader, output): # We quick check which store the spreadsheet belongs to
