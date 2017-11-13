@@ -1,6 +1,11 @@
 # getMonthlyEcommerceSales
 Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation exports.
 
+## Usage
+`python parseMonthlySales.py` will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the [hardcoded] **SpreadsheetExports** folder, parse them and output the results to the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace and todays date.
+Requirements: None
+All imported libraries are native to default python installation.
+
 ## What?
 **Gather month to date eCommerce sales, for only specified products/skus.**
 * Strip out any csv rows, line items, that are prior to current month or are not associated with desired product.
@@ -20,3 +25,4 @@ Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation expo
 * Pythonically add up totals of a column. Then output dictionary of {eBay: $TotalSales, Amazon: $X} to log file for easy (no gsheet/xlsx) reference
 * Add shipstation/shipping cost feature.
   * Match order number, append shipping cost index to EOL of output csv.
+* Port to ruby because it would be simple enough to do and Ocra is better than Py2Exe/Pyinstaller.
