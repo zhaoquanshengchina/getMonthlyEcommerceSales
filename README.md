@@ -23,7 +23,7 @@ System agnostic and all imported libraries are native to default python installa
     - Ebay allows for scheduled export within a **range** of dates. Dates often times different from Amazon/Walmart, above.
       * eBay exports also has duplicate line item entries when one order consists of multiple items. (archaic)
     - ie: Shipstation records true shipping cost, whereas other marketplaces have 'Free Shipping' recorded.
-* Total sales 'GUI' metrics aren't always reliable, sometimes are too general and/or don't offer filtering of sales by product/sku.
+* Total sales 'GUI' metrics aren't always reliable, sometimes are too general and/or don't offer filtering of sales.
 
 ## TODO
 * Pythonically add up totals of a column. Then output dictionary of {eBay: $TotalSales, Amazon: $X} to log file for easy (no gsheet/xlsx) reference
