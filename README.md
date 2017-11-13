@@ -32,3 +32,5 @@ System agnostic and all imported libraries are native to default python installa
   * Match order number, append shipping cost index to index's row.
   * Purpose of this repo is based on 'whim' of bosses. This feature would add usefulness to more people.
 * Port to ruby because it would be simple enough to do and Ocra is better than Py2Exe/Pyinstaller.
+* **Add Sales Tax feature**
+  * If sys.argv[2] == 'salestax' then if salestax index != None, append row to SalesTax-Month.csv
