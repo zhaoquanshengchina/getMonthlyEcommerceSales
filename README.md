@@ -12,7 +12,7 @@ System agnostic and all imported libraries are native to default python installa
 **Gather month to date eCommerce sales, for only specified products/skus.**
 * Strip out any csv rows, line items, that are prior to current month or are not associated with desired product.
 * Output the remaining rows (**matching** items) to an output csv that retains format/header of the original marketplace export.
-* Append spreadsheet functions (xlsx/gsheets) to marketplace's corresponding column, standard math for spread reference.
+* Add spreadsheet functions (xlsx/gsheets) to dynamic column, standard math for spreadsheet reference.
 
 ## Why?
 **Reliable weekly sales reports. Despite each eCommerce platform using different export conventions.**
