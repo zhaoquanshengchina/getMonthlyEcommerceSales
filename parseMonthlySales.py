@@ -2,13 +2,10 @@ import csv, os
 from datetime import datetime
 
 currentTime = datetime.now()
-x = 1
 
-def replaceWritePrint(output, index, x):
-	x += 1
+def replacePrint(output, index):
 	for each in index:
 		output.write('%s,' % each.replace(",", ""))
-	output.write('\n')
 	print index
 
 def eBayIndexes(reader, output, x):
@@ -22,7 +19,8 @@ def eBayIndexes(reader, output, x):
 			if purchaseDate != "":
 				purchaseDate = datetime.strptime(purchaseDate, '%b-%d-%y')
 				if currentTime.strftime('%b') == purchaseDate.strftime('%b'):
-					replaceWriteAndPrint(output, index, x)
+					replacePrint(output, index)
+					x += 1
 	output.write(",,,,,,,,,,,,,,,=sum(P2:P%s),,,,,=sum(U2:U%s),,,,,,,,,,,,,,,,,,,,," % (x, x))
 
 def amazonIndexes(reader, output, x):
@@ -35,7 +33,8 @@ def amazonIndexes(reader, output, x):
 			purchaseDate = datetime.strptime(purchaseDate, '%Y-%m-%d') 
 
 			if currentTime.strftime('%m') == purchaseDate.strftime('%m'): 
-				replaceWriteAndPrint(output, index, x)
+				replacePrint(output, index)
+				x += 1
 
 				output.write("=sum(D%s*K%s)" % (x, x))
 				output.write('\n') # new line escaped
@@ -52,10 +51,14 @@ def wallyIndexes(reader, output, x):
 			purchaseDate = datetime.strptime(purchaseDate, '%Y-%m-%d')
 
 			if currentTime.strftime('%m') == purchaseDate.strftime('%m'):
-				replaceWriteAndPrint(output, index, x)
+				replacePrint(output, index)
+				x += 1
+
 	output.write(",,,,,,,,,,,,,,,,,,,=SUM(T2:T%s),,=SUM(V2:V%s),,,,,,," % (x, x))
 
 def parseBasedOnStore(storeName, reader, output):
+	x = 1
+
 	if storeName == 'eBay':
 		eBayIndexes(reader, output, x)
 	elif storeName == 'Amazon':
@@ -72,6 +75,7 @@ def makeFile(file, outputFolder):
 
 		if file.endswith('.txt'):
 			reader = csv.reader(inCsv, delimiter='\t')
+
 		else:
 			reader = csv.reader(inCsv, delimiter=',')
 		header = reader.next()
@@ -84,8 +88,6 @@ def makeFile(file, outputFolder):
 			storeName = 'Wally'
 		elif header[0:3] == ['AmountPaid', 'BatchID', 'BillDutiesToSender']:
 			storeName = 'ShipStation'
-
-		print "%s: Finished" % storeName
 
 		with open('%s/%s-%s.csv' % (outputFolder, storeName, currentTime.strftime("%m-%d-%Y")), 'a+') as output:
 			for each in header:
