@@ -103,8 +103,8 @@ def makeFile(file, outputFolder): # Input file, output file
 inputFolder = './SpreadsheetExports/' # hardcoded location of input files
 outputFolder = './output/' # hardcoded file for output, converted files.
 
-inCWD = next(os.walk('%s' % inputFolder))[2] # Get each spreadsheet filename
-print inCWD
+currentDirectory = next(os.walk('%s' % inputFolder))[2] # Get each spreadsheet filename
+print currentDirectory
 
-for eachFile in inCWD: #Run script on each file
+for eachFile in currentDirectory: #Run script on each file
 	makeFile('./%s%s' % (inputFolder, eachFile), outputFolder)
