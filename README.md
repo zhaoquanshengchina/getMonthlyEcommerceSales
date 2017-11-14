@@ -35,7 +35,7 @@ Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the
 
 ## TODO
 * Finish ship station function --> Add =SUM spread functs
-* Pythonically add up totals of a column. Then output dictionary of {eBay: $TotalSales, Amazon: $X} to log file for easy (no gsheet/xlsx) reference
+* ~~Pythonically add up totals of a column. Then output dictionary of {eBay: $TotalSales, Amazon: $X} to log file for easy (no gsheet/xlsx) reference~~
 * Add sys.argv[1] input to specify SKU prefix that gets parsed
   * Not needed but would remove personalized, hardcoded 'LUM' SKU prefix.
   * Incorporate tarps when finalizing Nov.  
