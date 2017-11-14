@@ -34,6 +34,7 @@ Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the
 * Total sales 'GUI' metrics aren't always reliable, sometimes are too general and/or don't offer filtering of sales.
 
 ## TODO
+* Finish ship station function --> Add =SUM spread functs
 * Pythonically add up totals of a column. Then output dictionary of {eBay: $TotalSales, Amazon: $X} to log file for easy (no gsheet/xlsx) reference
 * Add sys.argv[1] input to specify SKU prefix that gets parsed
   * Not needed but would remove personalized, hardcoded 'LUM' SKU prefix.
@@ -41,6 +42,6 @@ Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the
 * **Add shipstation/shipping cost feature.**
   * Match order number, append shipping cost index to index's row.
   * Purpose of this repo is based on 'whim' of bosses. This feature would add usefulness to more people.
-* Port to ruby because it would be simple enough to do and Ocra is better than Py2Exe/Pyinstaller.
+* ~~Create windows binary~~
 * **Add Sales Tax feature**
   * If sys.argv[2] == 'salestax' then if salestax index != None, append row to SalesTax-Month.csv
