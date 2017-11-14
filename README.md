@@ -2,10 +2,10 @@
 Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation exports.
 
 **Before**  
-![before](https://user-images.githubusercontent.com/8212296/32787716-e0278daa-c91c-11e7-8fa6-466992289799.PNG)
+![before](https://user-images.githubusercontent.com/8212296/32787819-2b4af510-c91d-11e7-9881-d33ba9a21c2f.PNG)
   
 **After**  
-![after](https://user-images.githubusercontent.com/8212296/32787714-df09f098-c91c-11e7-9669-9453f5f8069c.PNG)
+![after](https://user-images.githubusercontent.com/8212296/32787818-2b145c6c-c91d-11e7-8dfb-96d95ea8788b.PNG)
 
 ## Usage
 `python parseMonthlySales.py` or execute **parseMonthlySalesEXE.exe**
