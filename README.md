@@ -6,7 +6,7 @@ Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation expo
 
 Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the **SpreadsheetExports** folder and parse them. The resulting files will be created in the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace, todays date and will include only sales, for a particular SKU for the current month.
   
-**Requirements:** Folder structure/None
+**Requirements:** None
 * **output** and **SpreadsheetExports** folders are required and hardcoded. Can easily be changed or made to disclude.
 * System agnostic. All imported libraries are native to default python installation. (ie: `os, csv, datetime`)  
 
