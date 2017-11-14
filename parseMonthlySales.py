@@ -6,7 +6,6 @@ currentTime = datetime.now() # One global for current time/month. Used basically
 def replacePrint(output, index): # repetitive commands ran during each marketplace function call.
 	for each in index:
 		output.write('%s,' % each.replace(",", "")) # replace any rogue commas in product title, customer address, etc...
-	output.write('\n')
 	print index # print each row that matched monthly/SKU requirements
 	#Note: default spreadsheet header format of original marketplace spreadsheet is retained.
 
@@ -23,6 +22,7 @@ def eBayIndexes(inputz, output, x): # Run on ebay Spreadsheet
 				if currentTime.strftime('%b') == purchaseDate.strftime('%b'): # Match month abbreviation to current. ie: Nov, Dec, etc...
 					replacePrint(output, index) # See above
 					x += 1
+					output.write('\n')
 	output.write(",,,,,,,,,,,,,,,=sum(P2:P%s),,,,,=sum(U2:U%s),,,,,,,,,,,,,,,,,,,,," % (x, x))
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
@@ -40,7 +40,7 @@ def amazonIndexes(inputz, output, x):
 				x += 1
 
 				output.write("=sum(D%s*K%s)" % (x, x)) # Amazon has line items, regardless of multi item orders. Multiply 'Quantity' with 'Sale price.'
-				#output.write('\n') # new line escaped
+				output.write('\n') # new line escaped
 
 	output.write(",,,=sum(D2:D%s),,,,,,,,=sum(L2:L%s)" % (x, x))
 
@@ -56,6 +56,7 @@ def wallyIndexes(inputz, output, x):
 			if currentTime.strftime('%m') == purchaseDate.strftime('%m'):
 				replacePrint(output, index)
 				x += 1
+				output.write('\n')
 
 	output.write(",,,,,,,,,,,,,,,,,,,=SUM(T2:T%s),,=SUM(V2:V%s),,,,,,,," % (x, x))
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
