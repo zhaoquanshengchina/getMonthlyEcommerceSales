@@ -2,11 +2,13 @@
 Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation exports.
 
 ## Usage
-`python parseMonthlySales.py` will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the **SpreadsheetExports** folder and parse them. The resulting files will be created in the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace, todays date and will include only sales, for a particular SKU for the current month.
+`python parseMonthlySales.py` or execute **parseMonthlySalesEXE.exe**
+
+Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the **SpreadsheetExports** folder and parse them. The resulting files will be created in the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace, todays date and will include only sales, for a particular SKU for the current month.
   
-**Requirements:** None  
-System agnostic and all imported libraries are native to default python installation. (`os, csv, datetime`)  
-(csv could easily be removed for further minimilism)
+**Requirements:** Folder structure/None
+* **output** and **SpreadsheetExports** folders are required and hardcoded. Can easily be changed or made to disclude.
+* System agnostic. All imported libraries are native to default python installation. (ie: `os, csv, datetime`)  
 
 ## What?
 **Gather month to date eCommerce sales, for only specified products/skus.**
