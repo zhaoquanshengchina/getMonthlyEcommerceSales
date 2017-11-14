@@ -6,6 +6,7 @@ currentTime = datetime.now() # One global for current time/month. Used basically
 def replacePrint(output, index): # repetitive commands ran during each marketplace function call.
 	for each in index:
 		output.write('%s,' % each.replace(",", "")) # replace any rogue commas in product title, customer address, etc...
+	output.write('\n')
 	print index # print each row that matched monthly/SKU requirements
 	#Note: default spreadsheet header format of original marketplace spreadsheet is retained.
 
@@ -39,7 +40,7 @@ def amazonIndexes(inputz, output, x):
 				x += 1
 
 				output.write("=sum(D%s*K%s)" % (x, x)) # Amazon has line items, regardless of multi item orders. Multiply 'Quantity' with 'Sale price.'
-				output.write('\n') # new line escaped
+				#output.write('\n') # new line escaped
 
 	output.write(",,,=sum(D2:D%s),,,,,,,,=sum(L2:L%s)" % (x, x))
 
