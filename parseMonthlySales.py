@@ -9,8 +9,8 @@ def replacePrint(output, index): # repetitive commands ran during each marketpla
 	print index # print each row that matched monthly/SKU requirements
 	#Note: default spreadsheet header format of original marketplace spreadsheet is retained.
 
-def eBayIndexes(reader, output, x): # Run on ebay Spreadsheet
-	for index in reader:
+def eBayIndexes(inputz, output, x): # Run on ebay Spreadsheet
+	for index in inputz:
 		if index[31][0:3] != "LUM": # index 31 == 'Custom SKU'
 			pass # Is not a product we want total sales of
 
@@ -25,8 +25,8 @@ def eBayIndexes(reader, output, x): # Run on ebay Spreadsheet
 	output.write(",,,,,,,,,,,,,,,=sum(P2:P%s),,,,,=sum(U2:U%s),,,,,,,,,,,,,,,,,,,,," % (x, x))
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
-def amazonIndexes(reader, output, x):
-	for index in reader:
+def amazonIndexes(inputz, output, x):
+	for index in inputz:
 		if index[2][0:3] != "LUM":
 			pass
 
@@ -43,8 +43,8 @@ def amazonIndexes(reader, output, x):
 
 	output.write(",,,=sum(D2:D%s),,,,,,,,=sum(L2:L%s)" % (x, x))
 
-def wallyIndexes(reader, output, x):
-	for index in reader:
+def wallyIndexes(inputz, output, x):
+	for index in inputz:
 		if index[20][0:3] != "LUM":
 			pass
 
@@ -59,15 +59,15 @@ def wallyIndexes(reader, output, x):
 	output.write(",,,,,,,,,,,,,,,,,,,=SUM(T2:T%s),,=SUM(V2:V%s),,,,,,,," % (x, x))
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
-def parseBasedOn(storeName, reader, output): # We quick check which store the spreadsheet belongs to
+def parseBasedOn(storeName, inputz, output): # We quick check which store the spreadsheet belongs to
 	x = 1
 
 	if storeName == 'eBay':
-		eBayIndexes(reader, output, x)
+		eBayIndexes(inputz, output, x)
 	elif storeName == 'Amazon':
-		amazonIndexes(reader, output, x)
+		amazonIndexes(inputz, output, x)
 	elif storeName == 'Wally':
-		wallyIndexes(reader, output, x)
+		wallyIndexes(inputz, output, x)
 	elif storeName == 'ShipStation':
 		print 'FINISH SHIPSTATION PARSING'
 	else:
@@ -77,12 +77,12 @@ def makeFile(file, outputFolder): # Input file, output file
 	with open(file, 'r') as inCsv:
 
 		if file.endswith('.txt'):
-			reader = csv.reader(inCsv, delimiter='\t') # If txt file (Amazon is) tab delimited
+			inputz = csv.reader(inCsv, delimiter='\t') # If txt file (Amazon is) tab delimited
 			# A little redundant code but necessary for reading header (full spreadsheet) properly later on
 
 		else:
-			reader = csv.reader(inCsv, delimiter=',')
-		header = reader.next()
+			inputz = csv.reader(inCsv, delimiter=',')
+		header = inputz.next()
 
 		if header[0:3] == ['item-name', 'listing-id', 'sku']: # Amazon header
 			storeName = 'Amazon'
@@ -98,7 +98,7 @@ def makeFile(file, outputFolder): # Input file, output file
 				output.write('%s,' % each) # Comma dlimited
 			output.write('\n') # New line escaped
 
-			parseBasedOn(storeName, reader, output)
+			parseBasedOn(storeName, inputz, output)
 
 inputFolder = './SpreadsheetExports/' # hardcoded location of input files
 outputFolder = './output/' # hardcoded file for output, converted files.
