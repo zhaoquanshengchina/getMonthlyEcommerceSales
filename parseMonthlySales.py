@@ -59,7 +59,7 @@ def wallyIndexes(reader, output, x):
 	output.write(",,,,,,,,,,,,,,,,,,,=SUM(T2:T%s),,=SUM(V2:V%s),,,,,,,," % (x, x))
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
-def parseBasedOnStore(storeName, reader, output): # We quick check which store the spreadsheet belongs to
+def parseBasedOn(storeName, reader, output): # We quick check which store the spreadsheet belongs to
 	x = 1
 
 	if storeName == 'eBay':
@@ -98,7 +98,7 @@ def makeFile(file, outputFolder): # Input file, output file
 				output.write('%s,' % each) # Comma dlimited
 			output.write('\n') # New line escaped
 
-			parseBasedOnStore(storeName, reader, output)
+			parseBasedOn(storeName, reader, output)
 
 inputFolder = './SpreadsheetExports/' # hardcoded location of input files
 outputFolder = './output/' # hardcoded file for output, converted files.
