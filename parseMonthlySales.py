@@ -9,23 +9,6 @@ def replacePrint(output, index): # repetitive commands ran during each marketpla
 	print index # print each row that matched monthly/SKU requirements
 	#Note: default spreadsheet header format of original marketplace spreadsheet is retained.
 
-def eBayIndexes(inputz, output, x): # Run on ebay Spreadsheet
-	for index in inputz:
-		if index[31][0:3] != "LUM": # index 31 == 'Custom SKU'
-			pass # Is not a product we want total sales of
-
-		elif index[31][0:3] == "LUM": # Is product we want total sales of
-			purchaseDate = index[25]
-					
-			if purchaseDate != "": # Ebay has some lines (multiple item orders) that are blank. Disclude them.
-				purchaseDate = datetime.strptime(purchaseDate, '%b-%d-%y') # make datetime instance using date format string from spreadsheet.
-				if currentTime.strftime('%b') == purchaseDate.strftime('%b'): # Match month abbreviation to current. ie: Nov, Dec, etc...
-					replacePrint(output, index) # See above
-					x += 1
-					output.write('\n')
-	output.write(",,,,,,,,,,,,,,,=sum(P2:P%s),,,,,=sum(U2:U%s),,,,,,,,,,,,,,,,,,,,," % (x, x))
-	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
-
 def amazonIndexes(inputz, output, x):
 	for index in inputz:
 		if index[2][0:3] != "LUM":
@@ -42,7 +25,24 @@ def amazonIndexes(inputz, output, x):
 				output.write("=sum(D%s*K%s)" % (x, x)) # Amazon has line items, regardless of multi item orders. Multiply 'Quantity' with 'Sale price.'
 				output.write('\n') # new line escaped
 
-	output.write(",,,=sum(D2:D%s),,,,,,,,=sum(L2:L%s)" % (x, x))
+	output.write(",,,=SUM(D2:D%s),,,,,,,=SUM(K2:K%s),=SUM(L2:L%s)" % (x, x, x))
+
+def eBayIndexes(inputz, output, x): # Run on ebay Spreadsheet
+	for index in inputz:
+		if index[31][0:3] != "LUM": # index 31 == 'Custom SKU'
+			pass # Is not a product we want total sales of
+
+		elif index[31][0:3] == "LUM": # Is product we want total sales of
+			purchaseDate = index[25]
+					
+			if purchaseDate != "": # Ebay has some lines (multiple item orders) that are blank. Disclude them.
+				purchaseDate = datetime.strptime(purchaseDate, '%b-%d-%y') # make datetime instance using date format string from spreadsheet.
+				if currentTime.strftime('%b') == purchaseDate.strftime('%b'): # Match month abbreviation to current. ie: Nov, Dec, etc...
+					replacePrint(output, index) # See above
+					x += 1
+					output.write('\n')
+	output.write(",,,,,,,,,,,,,,,=SUM(P2:P%s),,,,,=SUM(U2:U%s),,,,,,,,,,,,,,,,,,,,," % (x, x))
+	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
 def wallyIndexes(inputz, output, x):
 	for index in inputz:
