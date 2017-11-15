@@ -81,6 +81,30 @@ def wallyIndexes(inputz, output, x):
 	totalSalesLog("Wally: $%s" % total)
 	# Ugly code for last line in csv with spreadsheet functions in their respective columns.
 
+def shipStationIndexes(inputz, output, x):
+	total = 0
+	for index in inputz:
+		if index[88][0:3] != 'LUM':
+			pass
+
+		elif index[88][0:3] == "LUM":
+			purchaseDate = index[68].split(" ")[0]
+			purchaseDate = datetime.strptime(purchaseDate, '%m/%d/%Y')
+
+			if currentTime.strftime('%m') == purchaseDate.strftime('%m'):
+				replacePrint(output, index)
+
+				x += 1
+				total += float(index[96]) * float(index[75])
+				print total
+				output.write('\n')
+
+				x += 1
+				total += float
+
+	output.write(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=SUM(BX2:BX%s),,,,,,,,,,,,,,,,,,,,,=SUM(CS2:CS%s),,,,,,,,,") # BX = QTY, CS = unitprice
+	totalSalesLog("ShipStation: $%s" % total)
+
 def parseBasedOn(storeName, inputz, output): # We quick check which store the spreadsheet belongs to
 	x = 1
 
@@ -91,9 +115,7 @@ def parseBasedOn(storeName, inputz, output): # We quick check which store the sp
 	elif storeName == 'Wally':
 		wallyIndexes(inputz, output, x)
 	elif storeName == 'ShipStation':
-		print 'FINISH SHIPSTATION PARSING'
-	else:
-		return 'BROKEN!'
+		shipStationIndexes(inputz, output, x)
 
 def makeFile(file, outputFolder): # Input file, output file
 	with open(file, 'r') as inCsv:
