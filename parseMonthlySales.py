@@ -99,9 +99,6 @@ def shipStationIndexes(inputz, output, x):
 				print total
 				output.write('\n')
 
-				x += 1
-				total += float
-
 	output.write(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=SUM(BX2:BX%s),,,,,,,,,,,,,,,,,,,,,=SUM(CS2:CS%s),,,,,,,,,") # BX = QTY, CS = unitprice
 	totalSalesLog("ShipStation: $%s" % total)
 
