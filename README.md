@@ -7,6 +7,13 @@ Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation expo
 **After**  
 ![after](https://user-images.githubusercontent.com/8212296/32787818-2b145c6c-c91d-11e7-8dfb-96d95ea8788b.PNG)
 
+**Before**
+![beforez](https://user-images.githubusercontent.com/8212296/33212254-c833e978-d0e7-11e7-9c92-b0d0b00f3982.PNG)
+
+**After**
+![afterz](https://user-images.githubusercontent.com/8212296/33212256-c98ef998-d0e7-11e7-9c0e-52f0bc7866d9.PNG)
+
+
 ## Usage
 `python parseMonthlySales.py` will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the **SpreadsheetExports** folder and parse them. The resulting files will be created in the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace, todays date and will include only sales, for a particular SKU for the current month.
   
