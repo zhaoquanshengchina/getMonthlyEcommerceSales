@@ -8,10 +8,10 @@ Get monthly eCommerce Sales from Amazon, eBay, Walmart, Jet and ShipStation expo
 ![after](https://user-images.githubusercontent.com/8212296/32787818-2b145c6c-c91d-11e7-8dfb-96d95ea8788b.PNG)
 
 ## Usage
-`python parseMonthlySales.py` or execute **parseMonthlySalesEXE.exe**
-
-Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the **SpreadsheetExports** folder and parse them. The resulting files will be created in the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace, todays date and will include only sales, for a particular SKU for the current month.
+`python parseMonthlySales.py` will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the **SpreadsheetExports** folder and parse them. The resulting files will be created in the **output** folder. Each output will be a csv, with a name corresponding to the particular marketplace, todays date and will include only sales, for a particular SKU for the current month.
   
+`python OrderAnalysis.py` will take **one** ShipStation csv spreadsheet, in the same directory [as itself] and will remove all extraneous columns except ones pertaining to analysing sales and returns. ie: `python OrderAnalysis.py sales` will  output a trimmed csv which has columns like order date, order number, **cost of shipping**, item description, SKU, etc... where as `python OrderAnalysis.py returns` will perform the same function, but will output different columns relating to returns [manual orders export].
+
 **Requirements:** None
 * **output** and **SpreadsheetExports** folders are required and hardcoded. Can easily be changed or made to disclude.
 * System agnostic. All imported libraries are native to default python installation. (ie: `os, csv, datetime`)  
@@ -34,7 +34,7 @@ Will take **any** raw Amazon/Ebay/Walmart/ShipStation spreadsheet exports in the
 * Total sales 'GUI' metrics aren't always reliable, sometimes are too general and/or don't offer filtering of sales.
 
 ## TODO
-* Finish ship station function --> Add =SUM spread functs
+* ~~Finish ship station function --> Add =SUM spread functs~~
 * ~~Pythonically add up totals of a column. Then output dictionary of {eBay: $TotalSales, Amazon: $X} to log file for easy (no gsheet/xlsx) reference~~
 * Add sys.argv[1] input to specify SKU prefix that gets parsed
   * Not needed but would remove personalized, hardcoded 'LUM' SKU prefix.
