@@ -1,7 +1,13 @@
-import csv, os
+# Parse all csv spreadsheets in specific folder. Generate output SalesReport.csv's in export folder
+# Will parse sales based on online SKU prefix, seperated by a dash.
+# ie: COMPUTER-MODEL, COMPUTER-MODELZ are same 'category' of item, therefor will be parsed from items not in same category but with different colors, models, variations...
+# Add sales of all SKU's in same category, specified as arguement to this script. >> python parseMonthlySales.py COMPUTER
+
+import sys, csv, os
 from datetime import datetime
 
 currentTime = datetime.now() # One global for current time/month. Used basically everywhere.
+SKU = sys.argv[1]
 
 def totalSalesLog(sales):
 	with open('totalSalesLog.txt', 'a+') as salesLog:
@@ -16,10 +22,10 @@ def replacePrint(output, index): # repetitive commands ran during each marketpla
 def eBayIndexes(inputz, output, x): # Run on ebay Spreadsheet
 	total = 0
 	for index in inputz:
-		if index[31][0:3] != "LUM": # index 31 == 'Custom SKU'
+		if index[31].split('-')[0] != SKU: # index 31 == 'Custom SKU' Split on first '-'
 			pass # Is not a product we want total sales of
 
-		elif index[31][0:3] == "LUM": # Is product we want total sales of
+		elif index[31].split('-')[0] == SKU: # Is product we want total sales of
 			purchaseDate = index[25]
 					
 			if purchaseDate != "": # Ebay has some lines (multiple item orders) that are blank. Disclude them.
@@ -40,10 +46,10 @@ def eBayIndexes(inputz, output, x): # Run on ebay Spreadsheet
 def amazonIndexes(inputz, output, x):
 	total = 0
 	for index in inputz:
-		if index[2][0:3] != "LUM":
+		if index[2].split('-')[0] != SKU:
 			pass
 
-		elif index[2][0:3] == "LUM":
+		elif index[2].split('-')[0] == SKU:
 			purchaseDate = index[5].split(" ")[0] 
 			purchaseDate = datetime.strptime(purchaseDate, '%Y-%m-%d') 
 
@@ -62,10 +68,10 @@ def amazonIndexes(inputz, output, x):
 def wallyIndexes(inputz, output, x):
 	total = 0
 	for index in inputz:
-		if index[20][0:3] != "LUM":
+		if index[20].split('-')[0] != SKU:
 			pass
 
-		elif index[20][0:3] == "LUM":		
+		elif index[20].split('-')[0] == SKU:		
 			purchaseDate = index[2]
 			purchaseDate = datetime.strptime(purchaseDate, '%Y-%m-%d')
 
@@ -84,10 +90,10 @@ def wallyIndexes(inputz, output, x):
 def shipStationIndexes(inputz, output, x):
 	total = 0
 	for index in inputz:
-		if index[88][0:3] != 'LUM':
+		if index[88].split('-')[0] != SKU:
 			pass
 
-		elif index[88][0:3] == "LUM":
+		elif index[88].split('-')[0] == SKU:
 			purchaseDate = index[68].split(" ")[0]
 			purchaseDate = datetime.strptime(purchaseDate, '%m/%d/%Y')
 
@@ -97,10 +103,9 @@ def shipStationIndexes(inputz, output, x):
 				x += 1
 				total += float(index[96]) * float(index[75])
 				print total
-				output.write("=sum(CS%s*BX%s)" % (x, x))
 				output.write('\n')
 
-	output.write(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=SUM(BX2:BX%s),,,,,,,,,,,,,,,,,,,,,=SUM(CS2:CS%s),,,,,,,,,,=SUM(DC2:DC%s)" % (x, x, x))
+	output.write(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,=SUM(BX2:BX%s),,,,,,,,,,,,,,,,,,,,,=SUM(CS2:CS%s),,,,,,,,,") # BX = QTY, CS = unitprice
 	totalSalesLog("ShipStation: $%s" % total)
 
 def parseBasedOn(storeName, inputz, output): # We quick check which store the spreadsheet belongs to
@@ -125,6 +130,7 @@ def makeFile(file, outputFolder): # Input file, output file
 		else:
 			inputz = csv.reader(inCsv, delimiter=',')
 		header = inputz.next()
+
 		if header[0:3] == ['item-name', 'listing-id', 'sku']: # Amazon header
 			storeName = 'Amazon'
 		elif header[0:3] == ['Sales Record Number', 'User Id', 'Buyer Fullname']: # Ebay header
